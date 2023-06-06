@@ -15,7 +15,8 @@ function isValid(name) {
     return false;
   } else if (name.length < 4) {
     return false;
-  } else if (name.length > name.trim().length) {
+  } else if (name.includes(' '))
+  {
     return false;
   }
 
