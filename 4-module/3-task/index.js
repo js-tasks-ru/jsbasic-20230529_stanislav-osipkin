@@ -1,4 +1,4 @@
-function highlight() {
+function highlight(table) {
   let trList = table.children[1].rows;
 
   for (let tr of trList) {
@@ -9,7 +9,7 @@ function highlight() {
     else if (tr.cells[3].dataset.available === 'false') {
       tr.classList.add('unavailable');
     }
-    else if (!tr.cells[3].dataset.available) { tr.hidden = true; }
+    else { tr.hidden = true; }
 
     // gender
     if (tr.cells[2].textContent === 'm') {
@@ -21,7 +21,7 @@ function highlight() {
     }
 
     // inline-стиль
-    if (tr.cells[1].textContent < 18) {
+    if (parseInt(tr.cells[1].textContent) < 18) {
       tr.style.textDecoration = 'line-through';
     }
   }
