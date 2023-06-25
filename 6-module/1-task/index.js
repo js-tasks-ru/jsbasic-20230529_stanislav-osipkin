@@ -33,8 +33,7 @@ export default class UserTable {
         </thead>
           <tbody>
           ${this.rows.map(obj =>
-      `
-          <tr>
+    `   <tr>
           <td>${obj.name}</td>
           <td>${obj.age}</td>
           <td>${obj.salary}</td>
