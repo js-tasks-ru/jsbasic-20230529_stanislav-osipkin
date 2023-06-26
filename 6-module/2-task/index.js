@@ -4,7 +4,6 @@ export default class ProductCard {
   constructor(card) {
     this.card = card;
     this.render();
-    this.customEvent();
   }
 
   render() {
@@ -27,6 +26,7 @@ export default class ProductCard {
 
     return this.elem;
   }
+
   Onclick = () => {
     let myEvent = new CustomEvent('product-add', {
       detail: this.card.id,
@@ -35,17 +35,6 @@ export default class ProductCard {
 
     this.elem.dispatchEvent(myEvent);
   }
-
-  customEvent() {
-    this.elem.addEventListener('product-add', event => {
-      let btn = event.target.closest('.card__button');
-      console.log(btn);
-      if (btn) {
-        console.log(event.detail);
-      }
-    });
-  }
-
 
 }
 
