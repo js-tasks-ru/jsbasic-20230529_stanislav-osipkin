@@ -5,7 +5,7 @@ export default class Carousel {
     this.slides = slides;
     this.render();
     this.customEvent();
-    this.slideToggle();
+    // this.slideToggle();
   }
 
   render() {
@@ -20,7 +20,6 @@ export default class Carousel {
       <div class="carousel__inner"></div>
     </div>
     `);
-
     this.elem.querySelector('.carousel__inner').insertAdjacentHTML('beforeend',
       this.slides.map(({image, price, name}) =>
         `<div class="carousel__slide" data-id="penang-shrimp">
@@ -44,7 +43,6 @@ export default class Carousel {
     let myEvent = new CustomEvent('product-add', {
       detail: this.slides,
       bubbles: true,
-
     });
 
     this.elem.dispatchEvent(myEvent);
@@ -52,58 +50,52 @@ export default class Carousel {
 
   customEvent() {
     this.elem.addEventListener('product-add', event => {
-      this.carousel = event.target;
-      this.btn = this.carousel.closest('.card__button');
-      console.log(this.btn);
       console.log(event.detail);
 
+
     });
   }
 
-  slideToggle() {
+  // slideToggle() {
 
-    this.carousel = this.elem.closest('.carousel');
-    this.slide = this.carousel.querySelector('.carousel__inner');
-    this.carouselArr = Array.from(this.carousel.querySelectorAll('.carousel__slide'));
-    this.slideCount = 0;
-    this.offset = 0;
-    this.nextArrow = this.carousel.querySelector('.carousel__arrow_right');
-    this.prevArrow = this.carousel.querySelector('.carousel__arrow_left').style.display = 'none';
-    console.log(this.slide.offsetWidth);
+  //   this.carousel = this.elem.closest('.carousel');
+  //   this.slide = this.carousel.querySelector('.carousel__inner');
+  //   this.carouselArr = Array.from(this.carousel.querySelectorAll('.carousel__slide'));
+  //   this.slideCount = 0;
+  //   this.offset = 0;
+  //   this.nextArrow = this.carousel.querySelector('.carousel__arrow_right');
+  //   this.prevArrow = this.carousel.querySelector('.carousel__arrow_left').style.display = 'none';
+  //   console.log(this.slide.offsetWidth);
 
-    this.carousel.addEventListener('click', function (event) {
-      this.next = event.target.closest('.carousel__arrow_right');
-      this.prev = event.target.closest('.carousel__arrow_left');
+  //   this.carousel.addEventListener('click', function (event) {
+  //     this.next = event.target.closest('.carousel__arrow_right');
+  //     this.prev = event.target.closest('.carousel__arrow_left');
 
-      if (this.next) {
-        this.slideCount++;
-        this.prevArrow.style.display = '';
-        this.offset -= this.slide.offsetWidth;
+  //     if (this.next) {
+  //       this.slideCount++;
+  //       this.prevArrow.style.display = '';
+  //       this.offset -= this.slide.offsetWidth;
 
-        if (this.slideCount === (this.carouselArr.length - 1)) {
-          this.nextArrow.style.display = 'none';
-        }
+  //       if (this.slideCount === (this.carouselArr.length - 1)) {
+  //         this.nextArrow.style.display = 'none';
+  //       }
 
-        this.slide.style.transform = `translateX(${offset}px)`;
-      }
+  //       this.slide.style.transform = `translateX(${offset}px)`;
+  //     }
 
-      if (this.prev) {
-        this.slideCount--;
-        // this.nextArrow.style.display = '';
-        this.offset += this.slide.offsetWidth;
+  //     if (this.prev) {
+  //       this.slideCount--;
+  //       this.nextArrow.style.display = '';
+  //       this.offset += this.slide.offsetWidth;
 
-        if (this.slideCount === 0) {
-          this.prevArrow.style.display = 'none';
-        }
+  //       if (this.slideCount === 0) {
+  //         this.prevArrow.style.display = 'none';
+  //       }
 
-        this.slide.style.transform = `translateX(${offset}px)`;
-      }
-    });
-  }
-
-
-
-
+  //       this.slide.style.transform = `translateX(${offset}px)`;
+  //     }
+  //   });
+  // }
 
 
 }
