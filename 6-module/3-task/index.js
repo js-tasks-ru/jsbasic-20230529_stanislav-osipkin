@@ -2,6 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Carousel {
   constructor(slides) {
+    this.slideCount = 0;
     this.slides = slides;
     this.render();
     this.slideToggle();
@@ -39,55 +40,43 @@ export default class Carousel {
     return this.elem;
   }
 
-  Onclick = () => {
-    let myEvent = new CustomEvent('product-add', {
-      detail: this.elem.querySelector('.carousel__slide').dataset.id,
-      bubbles: true,
-    });
+  Onclick = (event) => {
 
-    this.elem.dispatchEvent(myEvent);
+    if (event.target.closest('.carousel__button')) {
+      this.elem.dispatchEvent(
+        new CustomEvent('product-add', {
+          detail: this.elem.querySelector('[data-id]').dataset.id,
+          bubbles: true,
+        })
+      );
+    }
+
+    if (event.target.closest('.carousel__arrow_right')) {
+      this.slideCount++;
+      this.slideToggle();
+    } else if (event.target.closest('.carousel__arrow_left')) {
+      this.slideCount--;
+      this.slideToggle();
+    }
+
   }
-
 
   slideToggle() {
-    this.container = document.querySelector('.container');
-    this.slide = this.elem.querySelector('.carousel__inner');
-    this.carouselArr = Array.from(this.elem.querySelectorAll('.carousel__slide'));
-    this.slideCount = 0;
-    this.offset = 0;
-    this.nextArrow = this.elem.querySelector('.carousel__arrow_right');
-    this.prevArrow = this.elem.querySelector('.carousel__arrow_left');
-    this.prevArrow.style.display = 'none';
+    let offset = -this.elem.offsetWidth * this.slideCount;
+    this.elem.querySelector('.carousel__inner').style.transform = `translateX(${offset}px)`;
 
-    this.container.addEventListener('click', function (event) {
-      this.next = event.target.closest('.carousel__arrow_right');
-      this.prev = event.target.closest('.carousel__arrow_left');
 
-      if (this.next) {
-        this.slideCount++;
-        this.prevArrow.style.display = '';
-        this.offset -= this.slide.offsetWidth;
+    if (this.slideCount == this.slides.length - 1) {
+      this.elem.querySelector('.carousel__arrow_right').style.display = 'none';
+    } else {
+      this.elem.querySelector('.carousel__arrow_right').style.display = '';
+    }
 
-        if (this.slideCount === (this.carouselArr.length - 1)) {
-          this.nextArrow.style.display = 'none';
-        }
-
-        this.slide.style.transform = `translateX(${offset}px)`;
-      }
-
-      if (this.prev) {
-        this.slideCount--;
-        this.nextArrow.style.display = '';
-        this.offset += this.slide.offsetWidth;
-
-        if (this.slideCount === 0) {
-          this.prevArrow.style.display = 'none';
-        }
-
-        this.slide.style.transform = `translateX(${offset}px)`;
-      }
-    });
+    if (this.slideCount == 0) {
+      this.elem.querySelector('.carousel__arrow_left').style.display = 'none';
+    } else {
+      this.elem.querySelector('.carousel__arrow_left').style.display = '';
+    }
   }
-
 
 }
