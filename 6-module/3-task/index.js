@@ -45,7 +45,7 @@ export default class Carousel {
     if (event.target.closest('.carousel__button')) {
       this.elem.dispatchEvent(
         new CustomEvent('product-add', {
-          detail: this.elem.querySelector('[data-id]').dataset.id,
+          detail: event.target.closest('[data-id]').dataset.id,
           bubbles: true,
         })
       );
