@@ -31,7 +31,7 @@ export default class RibbonMenu {
     );
 
     // Вначале 1-ый элемент активный
-    // this.elem.querySelector('.ribbon__item').classList.add('ribbon__item_active');
+    this.elem.querySelector('.ribbon__item').classList.add('ribbon__item_active');
 
     this.elem.addEventListener('click', this.Onclick);
 
