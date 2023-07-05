@@ -5,5 +5,26 @@ export default class ProductGrid {
   constructor(products) {
     this.products = products;
     this.filters = {};
+    this.render();
+    // this.card = new ProductCard();
+  }
+
+  render() {
+    this.elem = createElement(`
+    <div class="products-grid">
+      <div class="products-grid__inner">
+        <!--ВОТ ТУТ БУДУТ КАРТОЧКИ ТОВАРОВ-->
+      </div>
+    </div>`
+    );
+    let card = new ProductCard(
+      this.products.map(({image, price, name}) => {
+
+
+
+      )
+    );
+
+    return this.elem;
   }
 }

@@ -39,21 +39,23 @@ export default class CartIcon {
   }
 
   updatePosition() {
-    let initialTopCoord = this.elem.getBoundingClientRect().top + window.scrollY;
+    if (!this.elem.offsetHeight) { return; }
 
-    let leftIndent = Math.min(
-      document.querySelector('.container').getBoundingClientRect().right + 20,
-      document.documentElement.clientWidth - this.elem.offsetWidth - 10
-    ) + 'px';
+    if (!this.initialTopCoord) {
+      this.initialTopCoord = this.elem.getBoundingClientRect().top + window.scrollY;
+    }
 
-    if (window.scrollY > initialTopCoord) {
-
+    if (window.window.scrollY > this.initialTopCoord) {
+      console.log(window.window.scrollY);
       Object.assign(this.elem.style, {
         position: 'fixed',
         top: '50px',
         zIndex: 1e3,
         right: '10px',
-        left: leftIndent
+        left: Math.min(
+          document.querySelector('.container').getBoundingClientRect().right + 20,
+          document.documentElement.clientWidth - this.elem.offsetWidth - 10
+        ) + 'px',
       });
     } else {
       Object.assign(this.elem.style, {
