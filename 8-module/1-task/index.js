@@ -45,8 +45,8 @@ export default class CartIcon {
       this.initialTopCoord = this.elem.getBoundingClientRect().top + window.scrollY;
     }
 
-    if (window.window.scrollY > this.initialTopCoord) {
-      console.log(window.window.scrollY);
+    if (window.scrollY > this.initialTopCoord) {
+
       Object.assign(this.elem.style, {
         position: 'fixed',
         top: '50px',
