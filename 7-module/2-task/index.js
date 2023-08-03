@@ -24,9 +24,6 @@ export default class Modal {
     `);
   }
 
-  sub(ref) {
-    return this.elem.querySelector(`.modal__${ref}`);
-  }
 
   open() {
     document.body.append(this.elem);
@@ -55,12 +52,12 @@ export default class Modal {
   }
 
   setTitle(title) {
-    this.sub('title').textContent = title;
+    this.elem.querySelector('.modal__title').textContent = title;
   }
 
   setBody(node) {
-    this.sub('body').innerHTML = '';
-    this.sub('body').append(node);
+    this.elem.querySelector('.modal__body').innerHTML = '';
+    this.elem.querySelector('.modal__body').append(node);
   }
 
   close() {
