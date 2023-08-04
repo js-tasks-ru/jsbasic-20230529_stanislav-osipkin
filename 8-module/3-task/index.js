@@ -53,10 +53,14 @@ export default class Cart {
   }
 
   getTotalPrice() {
-    return this.cartItems.reduce(
-      (sum, item) => sum + item.product.price * item.count,
-      0
-    );
+    return this.cartItems.reduce((sum, item) => sum + item.product.price * item.count, 0);
   }
+
+  onProductUpdate(cartItem) {
+    // реализуем в следующей задаче
+
+    this.cartIcon.update(this);
+  }
+
 }
 

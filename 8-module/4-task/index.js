@@ -13,9 +13,14 @@ export default class Cart {
   }
 
   addProduct(product) {
+    if (!product) {
+      return;
+    }
+
     let cartItem = this.cartItems.find(
-      item => item.product.id == product.id
+      item => item.product.id === product.id
     );
+
     if (!cartItem) {
       cartItem = {
         product,
@@ -33,7 +38,7 @@ export default class Cart {
     let cartItem = this.cartItems.find(item => item.product.id == productId);
     cartItem.count += amount;
 
-    if (cartItem.count == 0) {
+    if (cartItem.count === 0) {
       this.cartItems.splice(this.cartItems.indexOf(cartItem), 1);
     }
 
@@ -49,17 +54,13 @@ export default class Cart {
   }
 
   getTotalPrice() {
-    return this.cartItems.reduce(
-      (sum, item) => sum + item.product.price * item.count,
-      0
-    );
+    return this.cartItems.reduce((sum, item) => sum + item.product.price * item.count, 0);
   }
 
   renderProduct(product, count) {
     return createElement(`
-    <div class="cart-product" data-product-id="${
-      product.id
-    }">
+    <div class="cart-product" data-product-id="${product.id
+      }">
       <div class="cart-product__img">
         <img src="/assets/images/products/${product.image}" alt="product">
       </div>
@@ -97,8 +98,8 @@ export default class Cart {
           <div class="cart-buttons__info">
             <span class="cart-buttons__info-text">total</span>
             <span class="cart-buttons__info-price">€${this.getTotalPrice().toFixed(
-              2
-            )}</span>
+      2
+    )}</span>
           </div>
           <button type="submit" class="cart-buttons__button btn-group__button button">order</button>
         </div>
@@ -134,6 +135,7 @@ export default class Cart {
     this.modal.open();
   }
 
+
   onModalBodyClick = (event) => {
     if (event.target.closest(".cart-counter__button")) {
       let productElem = event.target.closest("[data-product-id]");
@@ -143,9 +145,10 @@ export default class Cart {
         event.target.closest(".cart-counter__button_plus") ? 1 : -1
       );
     }
-  };
+  }
 
-  onProductUpdate({product, count}) {
+
+  onProductUpdate({ product, count }) {
     this.cartIcon.update(this);
 
     if (!this.modal || !document.body.classList.contains('is-modal-open')) {
@@ -189,15 +192,15 @@ export default class Cart {
     this.cartIcon.update(this);
 
     this.modalBody.innerHTML = `
-      <div class="modal__body-inner">
-        <p>
-          Order successful! Your order is being cooked :) <br>
-          We’ll notify you about delivery time shortly.<br>
-          <img src="/assets/images/delivery.gif">
-        </p>
-      </div>
-      `;
-  };
+    <div class="modal__body-inner">
+      <p>
+        Order successful! Your order is being cooked :) <br>
+        We’ll notify you about delivery time shortly.<br>
+        <img src="/assets/images/delivery.gif">
+      </p>
+    </div>
+    `;
+  }
 
   addEventListeners() {
     this.cartIcon.elem.onclick = () => this.renderModal();

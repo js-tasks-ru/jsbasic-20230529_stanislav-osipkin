@@ -35,7 +35,7 @@ export default class Carousel {
         `).join('')
     );
 
-      this.elem.addEventListener('click', this.Onclick);
+    this.elem.addEventListener('click', this.Onclick);
 
     return this.elem;
   }

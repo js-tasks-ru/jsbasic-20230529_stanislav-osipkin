@@ -13,7 +13,7 @@ describe('7-module-3-task', () => {
     config = {
       steps: 3,
       value: 0,
-    }
+    };
 
     styleElement = createElement(`
       <style>
