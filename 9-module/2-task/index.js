@@ -60,13 +60,49 @@ export default class Main {
         vegeterianOnly: event.target.checked
       });
     };
-
   }
 
   renderCarousel() {
     this.carousel = new Carousel(slides);
 
     document.querySelector('[data-carousel-holder]').append(this.carousel.elem);
+
+  }
+
+  renderRibbon() {
+    this.ribbonMenu = new RibbonMenu(categories);
+
+    document.querySelector('[data-ribbon-holder]').append(this.ribbonMenu.elem);
+  }
+
+  renderStepSlider() {
+    this.stepSlider = new StepSlider({
+      steps: 5,
+      value: 3
+    });
+
+    document.querySelector('[data-slider-holder]').append(this.stepSlider.elem);
+  }
+
+  renderCartIcon() {
+    let cartIconHolder = document.querySelector('[data-cart-icon-holder]');
+    this.cartIcon = new CartIcon();
+
+    cartIconHolder.append(this.cartIcon.elem);
+  }
+
+  renderProductsGrid() {
+    this.productsGrid = new ProductsGrid(this.products);
+    document.querySelector('[data-products-grid-holder]').innerHTML = '';
+    document.querySelector('[data-products-grid-holder]').append(this.productsGrid.elem);
+  }
+
+  async fetchProducts() {
+    let response = await fetch('products.json');
+    let products = await response.json();
+
+    return products;
+
   }
 
   renderRibbon() {
